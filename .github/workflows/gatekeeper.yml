@@ -1,0 +1,39 @@
+# Scenario: The PR gatekeeper
+# Your team wants a workflow that only runs checks when someone proposes a change, not on every single commit to every branch. Write a new workflow called PR Gatekeeper that:
+# Triggers only on pull requests targeting the main branch
+# Also allows the workflow to be triggered manually
+# Has one job called checks that runs on the latest Ubuntu runner
+# Prints which branch the PR is being merged into
+# Prints the PR number
+# Finishes by printing "Gatekeeper checks complete"
+
+# Scenario: The nightly housekeeper
+# Your team wants a workflow that tidies things up every night without anyone having to remember to run it, but they also want the option to trigger it by hand when testing changes. Write a new workflow called Nightly Housekeeper that:
+# Triggers on a schedule that runs once every day at 2 AM UTC
+# Also allows manual triggering
+# Has one job called cleanup that runs on the latest Ubuntu runner
+# Prints the current date and time
+# Prints a message saying "Running nightly cleanup"
+# Finishes by printing "Housekeeping complete"
+
+
+
+name: PR Gatekeeper
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print target branch
+        run: echo "This PR is being merged into the ${{ github.event.pull_request.base.ref }} branch."
+
+      - name: Print PR number
+        run: echo "This is PR #${{ github.event.pull_request.number }}."
+
+      - name: Finish checks
+        run: echo "Gatekeeper checks complete."
