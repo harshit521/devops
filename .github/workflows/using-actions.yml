@@ -1,5 +1,5 @@
 name: using-actions
-on: push
+on: workflow_dispatch
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -17,4 +17,3 @@ jobs:
               run: npm install
             - name: Run tests
               run: npm test
-              

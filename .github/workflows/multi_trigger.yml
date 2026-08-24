@@ -8,8 +8,6 @@
 # Finishes by printing "Detective work complete"
 name: multi_trigger
 on:
-    push:
-    pull_request:
     workflow_dispatch:
 jobs:
     detect:
